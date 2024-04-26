@@ -19,20 +19,21 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-12, macos-latest, windows-latest]
         zig-version: [0.11.0, 0.12.0]
+        test-variant: modern
         include:
-          - { os: ubuntu-latest, zig-version: 0.5.0, legacy: true }
-          - { os: ubuntu-latest, zig-version: 0.7.0, legacy: true }
-          - { os: ubuntu-latest, zig-version: 0.8.0, legacy: true }
-          - { os: ubuntu-latest, zig-version: 0.9.0, legacy: true }
-          - { os: ubuntu-latest, zig-version: 0.10.0, legacy: true }
-          - { os: macos-12, zig-version: 0.7.0, legacy: true }
-          - { os: macos-12, zig-version: 0.8.0, legacy: true }
-          - { os: macos-latest, zig-version: 0.9.0, legacy: true }
-          - { os: macos-latest, zig-version: 0.10.0, legacy: true }
-          - { os: windows-latest, zig-version: 0.7.0, legacy: true }
-          - { os: windows-latest, zig-version: 0.8.0, legacy: true }
-          - { os: windows-latest, zig-version: 0.9.0, legacy: true }
-          - { os: windows-latest, zig-version: 0.10.0, legacy: true }
+          - { os: ubuntu-latest, zig-version: 0.5.0, test-variant: legacy }
+          - { os: ubuntu-latest, zig-version: 0.7.0, test-variant: legacy }
+          - { os: ubuntu-latest, zig-version: 0.8.0, test-variant: legacy }
+          - { os: ubuntu-latest, zig-version: 0.9.0, test-variant: legacy }
+          - { os: ubuntu-latest, zig-version: 0.10.0, test-variant: legacy }
+          - { os: macos-12, zig-version: 0.7.0, test-variant: legacy }
+          - { os: macos-12, zig-version: 0.8.0, test-variant: legacy }
+          - { os: macos-12, zig-version: 0.9.0, test-variant: legacy }
+          - { os: macos-12, zig-version: 0.10.0, test-variant: legacy }
+          - { os: windows-latest, zig-version: 0.7.0, test-variant: legacy }
+          - { os: windows-latest, zig-version: 0.8.0, test-variant: legacy }
+          - { os: windows-latest, zig-version: 0.9.0, test-variant: legacy }
+          - { os: windows-latest, zig-version: 0.10.0, test-variant: legacy }
     runs-on: ${{matrix.os}}
     steps:
       - name: Checkout sources
@@ -42,10 +43,10 @@ jobs:
         with:
           version: ${{matrix.zig-version}}
       - name: Run tests (zig up to v0.10.x)
-        if: ${{ matrix.legacy }}
+        if: ${{ matrix.test-variant == "legacy" }}
         run: zig build test
         working-directory: test/v0.10
       - name: Run tests (zig v0.11.x)
-        if: ${{ !matrix.legacy }}
+        if: ${{ matrix.test-variant == "modern" }}
         run: zig build test
         working-directory: test/v0.11
