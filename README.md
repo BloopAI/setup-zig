@@ -2,6 +2,9 @@
 
 Use the zig compiler in your Github Actions workflows
 
+> [!WARNING]
+> This GitHub Action is unmaintained. Please use [mlugg/setup-zig](https://github.com/mlugg/setup-zig) instead.
+
 [Usage](#usage) - [License: Apache-2.0](#license)
 
 ## Usage
