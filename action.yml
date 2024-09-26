@@ -1,5 +1,5 @@
-name: 'Setup Zig'
-description: 'Setup a Zig compiler and add it to the path'
+name: 'Setup Zig (legacy)'
+description: 'Please use mlugg/setup-zig instead'
 branding:
   icon: play
   color: orange
