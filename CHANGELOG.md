@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.2.1
+
+This will be the final release in this repository.
+Please see [#88](https://github.com/goto-bus-stop/setup-zig/issues/88) for an upgrade guide.
+Thanks for using setup-zig!
+
+* Fix Apple Silicon. [#68](https://github.com/goto-bus-stop/setup-zig/pull/68)
+* Deprecate in favour of [mlugg/setup-zig](https://github.com/mlugg/setup-zig). [#89](https://github.com/goto-bus-stop/setup-zig/pull/89)
+
+Thanks [@davidgm94](https://github.com/davidgm94) and [@mlugg](https://github.com/mlugg)!
+
 ## 2.2.0
 * Update the action to use Node.js 20. [#61](https://github.com/goto-bus-stop/setup-zig/pull/61)
 * Add a test for zig 0.11.0. [#62](https://github.com/goto-bus-stop/setup-zig/pull/62)
