@@ -65,19 +65,30 @@ async function resolveVersion (arch, platform, version) {
   const index = await getJSON({ url: 'https://ziglang.org/download/index.json' })
 
   const availableVersions = Object.keys(index)
-  const useVersion = semver.valid(version)
-    ? semver.maxSatisfying(availableVersions.filter((v) => semver.valid(v)), version)
+
+  let resolvedVersion = version
+  if (version === 'latest') {
+    // Find latest stable release (non-master/non-dev versions with valid semver)
+    const stableVersions = availableVersions
+      .filter(v => v !== 'master' && v !== 'dev' && semver.valid(v))
+      .sort(semver.compare)
+
+    resolvedVersion = stableVersions[stableVersions.length - 1]
+  }
+
+  const useVersion = semver.valid(resolvedVersion)
+    ? semver.maxSatisfying(availableVersions.filter((v) => semver.valid(v)), resolvedVersion)
     : null
 
-  const meta = index[useVersion || version]
+  const meta = index[useVersion || resolvedVersion]
   if (!meta || !meta[host]) {
-    throw new Error(`Could not find version ${useVersion || version} for platform ${host}`)
+    throw new Error(`Could not find version ${useVersion || resolvedVersion} for platform ${host}`)
   }
 
   const downloadUrl = meta[host].tarball
   const variantName = path.basename(meta[host].tarball).replace(`.${ext}`, '')
 
-  return { downloadUrl, variantName, version: useVersion || version }
+  return { downloadUrl, variantName, version: useVersion || resolvedVersion }
 }
 
 module.exports = {

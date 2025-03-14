@@ -34,6 +34,10 @@ async function test () {
   await assert.doesNotReject(resolveVersion('x64', 'linux', 'master'))
   await assert.doesNotReject(resolveVersion('x64', 'win32', 'master'))
   await assert.doesNotReject(resolveVersion('arm64', 'darwin', 'master'))
+
+  await assert.doesNotReject(resolveVersion('x64', 'linux', 'master'))
+  await assert.doesNotReject(resolveVersion('x64', 'win32', 'latest'))
+  await assert.doesNotReject(resolveVersion('arm64', 'darwin', 'latest'))
 }
 
 test().catch((error) => {
