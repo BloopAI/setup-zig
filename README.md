@@ -37,9 +37,16 @@ Optionally set a Zig version:
     version: 0.7.0
 ```
 
+Or use the latest stable version:
+```yaml
+- uses: goto-bus-stop/setup-zig@v2
+  with:
+    version: latest
+```
+
 The default is to use the nightly `master` builds.
 
-Or [pin to a specific commit](https://github.com/goto-bus-stop/setup-zig/issues/13) using `version+commithash` syntax:
+You can also [pin to a specific commit](https://github.com/goto-bus-stop/setup-zig/issues/13) using `version+commithash` syntax:
 ```yaml
 - uses: goto-bus-stop/setup-zig@v2
   with:
